@@ -8,7 +8,6 @@ import datetime
 class Producto(models.Model):
     codigo_producto = models.CharField(max_length=200)
     nombre_producto = models.CharField(max_length=200)
-    
     precio_unitario = models.IntegerField(validators=[MinValueValidator(1)])
 
     def __str__(self):
