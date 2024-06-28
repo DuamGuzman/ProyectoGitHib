@@ -54,9 +54,15 @@
                         <a class="nav-link mx-1" href="{% url 'index' %}">Inicio</a>
                     </li>
                     
+                    {% if user.is_authenticated %}
                     <li class="nav-item ms-3">
-                        <a class="btn btn-black btn-rounded" href="{% url 'login' %}">Ingresar</a>
+                        <a class="btn btn-black btn-rounded" href="{% url 'logout' %}">Cerrar Sesión</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item ms-3">
+                        <a class="btn btn-black btn-rounded" href="{% url 'login' %}">Iniciar Sesión</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

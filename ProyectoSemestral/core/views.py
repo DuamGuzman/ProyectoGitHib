@@ -13,9 +13,11 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib import messages
 # Create your views here.
+@login_required
 def index(request):
     return render(request, 'core/index.html')
 
+@login_required
 def ordenlista(request):
     ordenes = Orden.objects.all()
     productos = Producto.objects.all()
@@ -24,6 +26,7 @@ def ordenlista(request):
 
 from django.shortcuts import redirect
 
+@login_required
 def login_views(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -43,7 +46,7 @@ def login_views(request):
 
     return render(request, 'core/login.html')
 
-
+@login_required
 def orden(request):
     
     if request.method == 'POST':
@@ -93,6 +96,7 @@ def orden(request):
 def login(request):
     return render(request, 'core/login.html')
 
+@login_required
 def producto(request):
     if request.method == 'POST':
         formularioproducto = ProductoForm(request.POST)
