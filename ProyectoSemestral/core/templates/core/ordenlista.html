@@ -37,6 +37,7 @@
                     <tr>
                         <td>{{ orden.numero_orden }}</td>
                         <td>{{ orden.fecha_orden }}</td>
+                        <td>{{ orden.cantidad }}</td>
                         <td>{{ orden.rut_cliente }}</td>
                         <td>{{ orden.nombre_razon_social }}</td>
                         <td>{{ orden.direccion }}</td>
@@ -58,9 +59,7 @@
                             {% endfor %}
                         </td>
                         <td>
-                            {% for producto in orden.productos.all %}
-                                {{ producto.cantidad }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
+                            
                         </td>
                         <td>{{ orden.tipo_servicio }}</td>
                         <td>{{ orden.rut }}</td>
