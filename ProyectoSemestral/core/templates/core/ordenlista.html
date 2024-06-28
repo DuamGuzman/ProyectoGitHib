@@ -5,77 +5,82 @@
 
 {% block contenido %}
 <h1>Lista de Órdenes</h1>
-<div class="table-responsive">
-    <div class="scrollable-table">
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Número de Orden</th>
-                    <th scope="col">Fecha de Orden</th>
-                    <th scope="col">RUT Cliente</th>
-                    <th scope="col">Nombre/Razón Social</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Cod. Producto</th>
-                    <th scope="col">Precio unitario</th>
-                    <th scope="col">Productos</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Tipo de Servicio</th>
-                    <th scope="col">Rut Empresa</th>
-                    <th scope="col">Razon Social</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Sitio web</th>
-                    <th scope="col">Tipo Servicio</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                {% for orden in ordenes %}
-                    <tr>
-                        <td>{{ orden.numero_orden }}</td>
-                        <td>{{ orden.fecha_orden }}</td>
-                        <td>{{ orden.cantidad }}</td>
-                        <td>{{ orden.rut_cliente }}</td>
-                        <td>{{ orden.nombre_razon_social }}</td>
-                        <td>{{ orden.direccion }}</td>
-                        <td>{{ orden.telefono }}</td>
-                        <td>{{ orden.correo }}</td>
-                        <td>
-                            {% for producto in orden.productos.all %}
-                                {{ producto.codigo_producto }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {% for producto in orden.productos.all %}
-                                {{ producto.precio_unitario }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            {% for producto in orden.productos.all %}
-                                {{ producto.nombre_producto }}{% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </td>
-                        <td>
-                            
-                        </td>
-                        <td>{{ orden.tipo_servicio }}</td>
-                        <td>{{ orden.rut }}</td>
-                        <td>{{ orden.razon_social }}</td>
-                        <td>{{ orden.direccion }}</td>
-                        <td>{{ orden.telefono }}</td>
-                        <td>{{ orden.correo }}</td>
-                        <td>{{ orden.sitio_web }}</td>
-                        <td>{{ orden.tipo_servicio }}</td>
-                    </tr>
-                {% endfor %}
-                
-            </tbody>
-        </table>
+{% for orden in ordenes %}
+    <div class="order-container" style="background-color: {% cycle '#f9f9f9' '#e9e9e9' %}; margin: 0 auto;">
+        <div class="order-header">
+            {% if orden.foto %}
+                <img src="{{ orden.foto.url }}" alt="Foto de la Orden" class="order-photo">
+            {% else %}
+                <img src="{% static 'core/img/NOVATECH.png' %}" alt="Foto de la Orden" class="order-photo">
+            {% endif %}
+            <h2>Orden de Compra: {{ orden.numero_orden }}</h2>
+            <div class="buttons">
+                <a href="#" class="btn btn-primary">
+                    <img src="{% static 'core/img/lapiz.png' %}" alt="Editar" class="button-icon">
+                    Editar
+                </a>
+                <a href="#" class="btn btn-success">
+                    <img src="{% static 'core/img/descarga.png' %}" alt="Descargar" class="button-icon">
+                    Descargar
+                </a>
+            </div>
+        </div>
+
+        <div class="order-details">
+            <div class="client-details">
+                <h3>Detalles del Cliente</h3>
+                <p><strong>RUT Cliente:</strong> {{ orden.rut_cliente }}</p>
+                <p><strong>Nombre/Razón Social:</strong> {{ orden.nombre_razon_social }}</p>
+                <p><strong>Dirección:</strong> {{ orden.direccion }}</p>
+                <p><strong>Teléfono:</strong> {{ orden.telefono }}</p>
+                <p><strong>Correo:</strong> {{ orden.correo }}</p>
+            </div>
+            <div class="order-info">
+                <h3>Detalles de la Orden</h3>
+                <p><strong>Número de Orden:</strong> {{ orden.numero_orden }}</p>
+                <p><strong>Fecha de Orden:</strong> {{ orden.fecha_orden }}</p>
+                <p><strong>Tipo de Servicio:</strong> {{ orden.tipo_servicio }}</p>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <div class="scrollable-table">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Cod. Producto</th>
+                            <th scope="col">Nombre Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio Unitario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in orden.productos.all %}
+                            <tr>
+                                <td>{{ producto.codigo_producto }}</td>
+                                <td>{{ producto.nombre_producto }}</td>
+                                <td>{{ producto.cantidad }}</td>
+                                <td>{{ producto.precio_unitario }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h3>Resumen de la Orden</h3>
+            <p><strong>Total:</strong> {{ orden.total }}</p>
+            <p><strong>Rut Empresa:</strong> {{ orden.rut }}</p>
+            <p><strong>Razon Social:</strong> {{ orden.razon_social }}</p>
+            <p><strong>Dirección:</strong> {{ orden.direccion }}</p>
+            <p><strong>Telefono:</strong> {{ orden.telefono }}</p>
+            <p><strong>Correo:</strong> {{ orden.correo }}</p>
+            <p><strong>Sitio web:</strong> {{ orden.sitio_web }}</p>
+        </div>
     </div>
-</div>
+{% endfor %}
 {% endblock %}
 
 {% block css %}
@@ -85,9 +90,58 @@
         margin: 20px;
     }
 
-    h1 {
-        text-align: center;
+    .order-container {
+        padding: 20px;
         margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        /* max-width of the container */
+        margin: 0 auto; 
+        /* Center the container */
+    }
+
+    .order-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .order-header .order-photo {
+        width: 80px; /* Ajusta el tamaño de la foto según sea necesario */
+        border-radius: 50%; /* Opcional: redondea la foto si lo deseas */
+    }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .buttons a {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+
+    .button-icon {
+        width: 20px; /* Ajusta el tamaño del ícono según sea necesario */
+        margin-right: 5px; /* Espacio entre el ícono y el texto */
+    }
+
+    .order-details {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .client-details, .order-info {
+        width: 48%;
+    }
+
+    h3 {
+        margin-top: 0;
     }
 
     table {
@@ -119,7 +173,7 @@
 
     .scrollable-table {
         overflow-x: auto;
-        white-space: nowrap; /* Evita que los elementos de la tabla se envuelvan */
+        white-space: nowrap;
     }
 </style>
 {% endblock %}
