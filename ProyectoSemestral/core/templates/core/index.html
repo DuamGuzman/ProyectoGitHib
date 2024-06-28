@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block contenido %}
+
+
+{% block css %}
+
+{% endblock %}
+{% static 'core/' %}
+
+ 
+      
+    
+<div class="services_section layout_padding">
+   <div class="container">
+      <h1 class="services_taital">Opciones de ordenes de compra</h1>
+      
+      <div class="services_section2 layout_padding">
+          <div class="row justify-content-center align-items-start">
+              <div class="col-lg-3 col-sm-6 d-flex flex-column">
+                  <div class="icon_1"><img src="{% static 'core/img/VerOrden.png' %}"></div>
+                  <h2 class="furnitures_text">Ver ordenes de compra</h2>
+                  <div class="read_bt_main mt-auto">
+                      <div class="read_bt"><a href="{% url 'ordenlista' %}">Ver</a></div>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-sm-6 d-flex flex-column">
+                  <div class="icon_1"><img src="{% static 'core/img/CrearOrden.png' %}"></div>
+                  <h2 class="furnitures_text">Crear orden de compra</h2>
+                  <div class="read_bt_main mt-auto">
+                      <div class="read_bt"><a href="{% url 'orden' %}">Crear</a></div> 
+                  </div>
+              </div>
+          </div>
+      </div>
+   </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}
