@@ -20,7 +20,7 @@
                     <img src="{% static 'core/img/lapiz.png' %}" alt="Editar" class="button-icon">
                     Editar
                 </a>
-                <a href="#" class="btn btn-success">
+                <a href="{% url 'descargar_pdf' orden.id %}" class="btn btn-success">
                     <img src="{% static 'core/img/descarga.png' %}" alt="Descargar" class="button-icon">
                     Descargar
                 </a>
