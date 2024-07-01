@@ -6,7 +6,7 @@
 *NovaTech es un emprendimiento dedicado a la venta de componentes electrónicos
 para armado de PCs tales como tarjetas de video, disipadores, memorias RAM, discos duros, y mucho más.*  
 
-*La página tiene como objetivo principal la emisión y gestión de facturas, además de la opción de aprobarlas, rechazarlas y rectificarlas (actualizarlas).*
+*La página tiene como objetivo principal la creación y gestión de facturas, además de la opción de aprobarlas, rechazarlas y rectificarlas (actualizarlas).*
 
 
 ## Instrucciones de uso
