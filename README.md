@@ -1,19 +1,20 @@
-
+mnnnbvvccczxzzdssse4A<
 ## Página web NovaTech
 
 ### Descripción
 
 *NovaTech es un emprendimiento dedicado a la venta de componentes electrónicos
-para armado de PC stales como tarjetas de video, disipadores, memorias RAM, discos duros, y mucho más.*  
+para armado de PCs tales como tarjetas de video, disipadores, memorias RAM, discos duros, y mucho más.*  
+
+*La página tiene como objetivo principal la emisión y gestión de facturas, además de la opción de aprobarlas, rechazarlas y rectificarlas (actualizarlas).*
 
 
 ## Instrucciones de uso
 
-###Requerimientos
+### Requerimientos
 
 * Descargar e intalar Git Bash. [Link directo de descarga https://gitforwindows.org/ ]
 *  Descargar e insalar Visual Studio Code para visualizar/editar el código del proyecto 
-
 
 ### Clonar el repositorio
 
@@ -51,4 +52,5 @@ Ingresar al repositorio del proyecto [https://github.com/DuamGuzman/ProyectoGitH
 * Realiza tus cambios y haz commits (git commit -m 'Añadir nueva característica').
 * Empuja la rama (git push origin feature/nueva-caracteristica).
 * Abre una solicitud de pull (pull request).
-* Esperar a que la solicitud sea aprobada
+* Esperar a que la solicitud sea aprobada.
+
