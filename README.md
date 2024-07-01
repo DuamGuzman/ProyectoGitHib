@@ -1,31 +1,54 @@
 
+## Página web NovaTech
+
+### Descripción
+
+*NovaTech es un emprendimiento dedicado a la venta de componentes electrónicos
+para armado de PC stales como tarjetas de video, disipadores, memorias RAM, discos duros, y mucho más.*  
 
 
-<p align="center">
-  <img width="300" height="200" src="https://lh7-us.googleusercontent.com/slidesz/AGV_vUcHWh96UW1Tw3PHcUeTTN-ZdbU5YoG2kt8hq-CBQt4p5ybt2EWQUldJFQQ2uAr-SyWpajhdwPZJFLGKqys3ExelqkyIvQBlAX03DZ5B_SBMaWJVWYRNrMsYKANJ93ytBgeaWOqOU-sef9cHb5ZS9I-xjT42w_uvVcUKZryoT8-qs_L2i7A4YHs=s2048?key=abUv318YwV4nh_b4NmCAuQ">
-</p>
+## Instrucciones de uso
+
+###Requerimientos
+
+* Descargar e intalar Git Bash. [Link directo de descarga https://gitforwindows.org/ ]
+*  Descargar e insalar Visual Studio Code para visualizar/editar el código del proyecto 
 
 
+### Clonar el repositorio
 
-## NovaTech
+* Una vez que la instalación de Git Bash se haya completado, hacer doble click en el ícono de Git Bash.
+* Posteriormente debes clonar el repositorio. Para ello primero debes escoger la ubicación donde se descargará/clonará el archivo (Disco C: O D:) y ejecutar los siguientes comandos en la consola Git Bash:
 
-Es una tienda en línea especializada en la venta de una amplia gama de componentes de PC de alta calidad para entusiastas de la informática y profesionales del sector. Nuestro objetivo es proporcionar a nuestros clientes una experiencia de compra conveniente y satisfactoria, ofreciendo productos de última generación, servicio al cliente excepcional y conocimientos técnicos especializados.
-## Instrucciones
+1. cd D:
+2. git clone https://github.com/DuamGuzman/ProyectoGitHib.git (se debe copiar y en la consola se pega haciendo click derecho en "Pegar")
+3. Esperar que se clone el archivo.
+    1. Si se clona exitosamente, escribir  en consola " code ." para abrir Visual Studio Code. 
 
-### Paso a paso
+### Iniciar el proyecto - Ingresar a la página como usuario
 
-* Descargar repositorio
-* Abrir carpeta en visual Studio
-* Abrir la consola 
-* Escribir en consola "pip install -r requirements.txt"
-* para iniciar el proyecto de forma local, escribir en consola "python manage.py runserver"
-* para ingresar a la sesión de administrador, usuario = "admin", contraseña = "adminadmin"
+* En la consola o terminal de Visual Studio code, escribir los siguientes comandos:
+  * pip install -r requirements.txt 
+  * Esto hará que se instalen los componentes necesarios para ejecutar el proyecto exitosamente
+  * Posteriormente, ingresar el comando "python manage.py runserver"
+  * Una vez que el proyecto inicie, ingresar a la url proporcionada en la  terminal.
 
-### Contacto 
+* Para ingresar a la página:
+  * En la página de inicio de sesión, ingresar las siguientes credenciales:
+    * User: admin 
+    * Password: admin
+* Una vez ingresados los datos, se redirigirá al home(Index).
 
-Para obtener más información sobre nuestros productos y servicios, o para realizar consultas adicionales, no dude en ponerse en contacto con nosotros:
+## Contribuciones
 
-* Correo Electrónico: NovaTech@gmail.com
-* Teléfono: +1 (555) 123-4567
-* Horario de Atención al Cliente: Lunes a Viernes, de 9:00 a.m. a 6:00 p.m. (GMT-5)
-* Dirección: 123 Main Street, Ciudad Tech, Estado, País
+Las contribuciones son bienvenidas. Por favor, sigue los siguientes pasos:
+
+* Haz un fork del proyecto:
+Ingresar al repositorio del proyecto [https://github.com/DuamGuzman/ProyectoGitHib]
+* Haz click en el botón "Fork", y luego "Crear nuevo Fork"
+* Escribir una descripción (opcional) y luego haz click en el botón verde "Crear Fork"
+* Crea una nueva rama: En la consola de Git Bash (git checkout -b feature/nueva-caracteristica).
+* Realiza tus cambios y haz commits (git commit -m 'Añadir nueva característica').
+* Empuja la rama (git push origin feature/nueva-caracteristica).
+* Abre una solicitud de pull (pull request).
+* Esperar a que la solicitud sea aprobada
