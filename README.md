@@ -24,7 +24,9 @@ para armado de PCs tales como tarjetas de video, disipadores, memorias RAM, disc
 1. cd D:
 2. git clone https://github.com/DuamGuzman/ProyectoGitHib.git (se debe copiar y en la consola se pega haciendo click derecho en "Pegar")
 3. Esperar que se clone el archivo.
-    1. Si se clona exitosamente, escribir  en consola " code ." para abrir Visual Studio Code. 
+    1. Se ingresa a la carpeta principal utilizzando el siguiente comando: cd ProyectoGitHib 
+    2. Ejeuctar: cd ProyectoSemestral, para abrir la carpeta donde esta el proyecto
+    3. Posteriormente escribir  en consola " code ." para abrir Visual Studio Code. 
 
 ### Iniciar el proyecto - Ingresar a la página como usuario
 
