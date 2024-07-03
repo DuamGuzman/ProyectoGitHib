@@ -10,7 +10,13 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('producto/', producto, name='producto'),
     path('ordenlista/', ordenlista, name='ordenlista'),
-     path('ordenlista/<int:orden_id>/descargar-pdf/', views.descargar_pdf, name='descargar_pdf'),
+    path('ordenlista/<int:orden_id>/descargar-pdf/', views.descargar_pdf, name='descargar_pdf'),
+    path('actualizar_orden/<int:orden_id>/', views.actualizar_orden, name='actualizar_orden'),
+    path('aceptarOrden/', views.aceptarOrden, name='aceptarOrden'),
+    path('detalleorden/<int:orden_id>/', views.detalleorden, name='detalleorden'),
+    path('verdetalle/<int:orden_id>/', views.verdetalle, name='verdetalle'),
+    path('rechazar/<int:orden_id>/', views.rechazar, name='rechazar'),
+    path('orden/<int:id_orden>/', mi_vista, name='detalle_orden'),  # Asume que quieres usar este patrón de URL
 
     
 ]

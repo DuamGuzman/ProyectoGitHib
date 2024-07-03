@@ -8,3 +8,6 @@ from .models import *
 admin.site.register(Orden)
 admin.site.register(Producto)
 admin.site.register(Usuario)
+admin.site.register(Estado)
+admin.site.register(EstadoPedido)
+admin.site.register(Comprobante)

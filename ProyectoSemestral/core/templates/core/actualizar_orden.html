@@ -1,0 +1,118 @@
+
+{% load static %}
+
+{% block title %}Actualizar Orden{% endblock %}
+
+{% block css %}
+<style>
+    .form-container {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-title {
+        color: #343a40;
+    }
+
+    .form-section-title {
+        color: #495057;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .main-container {
+        margin-top: 80px;
+    }
+
+    .table-container {
+        margin-top: 40px;
+    }
+
+    .table thead th {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .table tfoot td {
+        font-weight: bold;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        color: #ffffff;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block contenido %}
+<h1>Actualizar Orden</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a href="{% url 'ordenlista' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>NovaTech</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/responsive.css' %}">
+    <link rel="icon" href="{% static 'core/images/fevicon.png' %}" type="image/gif" />
+    <link rel="stylesheet" href="{% static 'core/css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static 'core/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img id="NovaTech-logo" src="{% static 'core/img/NOVATECH.png' %}" alt="MDB Logo" draggable="false" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item ms-3">
+                        <a class="nav-link mx-1" href="{% url 'index' %}">Inicio</a>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

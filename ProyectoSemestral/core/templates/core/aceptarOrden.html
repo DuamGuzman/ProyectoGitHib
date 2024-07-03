@@ -16,13 +16,13 @@
         {% endif %}
         <h2>Orden de Compra: {{ orden.numero_orden }}</h2>
         <div class="buttons">
-            <a href="{% url 'actualizar_orden' orden.id %}" class="btn btn-primary">
-                <img src="{% static 'core/img/lapiz.png' %}" alt="Rectificar" class="button-icon">
-                Rectificar
+            <a href="{% url 'rechazar' orden.id %}" target="_blank" class="btn btn-primary">
+                <img src="{% static 'core/img/lapiz.png' %}" alt="Rechazar" class="button-icon">
+                Rechazar
             </a>
-            <a href="{% url 'descargar_pdf' orden.id %}" class="btn btn-success">
-                <img src="{% static 'core/img/descarga.png' %}" alt="Descargar" class="button-icon">
-                Descargar
+            <a href="{% url 'detalleorden' orden.id %}" class="btn btn-success">
+                <img src="{% static 'core/img/descarga.png' %}" alt="Aceptar" class="button-icon">
+                Aceptar
             </a>
         </div>
     </div>
@@ -69,8 +69,6 @@
                         <th scope="col">Nombre Producto</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Precio Unitario</th>
-                        <th scope="col">IVA</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -78,9 +76,8 @@
                     <tr>
                         <td>{{ producto.codigo_producto }}</td>
                         <td>{{ producto.nombre_producto }}</td>
-                        <td>{{ orden.cantidad }}</td>
+                        <td>{{ producto.cantidad }}</td>
                         <td>{{ producto.precio_unitario }}</td>
-                        <td>19%</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -88,20 +85,10 @@
         </div>
     </div>
 
-    {% load my_filters %}
-
-
     <div class="order-summary">
         <h3>Precio Total</h3>
-        {% if orden.productos.all %}
-        {% for producto in orden.productos.all %}
-        <!-- Muestra el precio unitario de cada producto sin aplicar IVA -->
-        <p><strong>Precio de {{ producto.nombre_producto }}:</strong> {{ producto.precio_unitario|incremento_iva }}</p>
-        {% endfor %}
-        <p>Total con IVA: {{ total_con_iva }}</p>
-        {% endif %}
+        <p><strong>Total:</strong> {{ orden.total }}</p>
     </div>
-
     <div class="order-summary">
         <h3>Estado de la Orden</h3>
         {% if orden.estado.nombre == 'Rectificada' %}
@@ -116,14 +103,6 @@
         {% else %}
         <p><strong>Estado del Pedido:</strong> Por Entregar</p>
         {% endif %}
-
-
-        <!-- Agregar el botón para ver detalle -->
-        <a href="{% url 'verdetalle' orden.id %}" class="btn btn-info">
-            <img src="{% static 'core/img/ver.png' %}" alt="Ver Detalle" class="button-icon">
-            Ver Detalle
-        </a>
-
     </div>
 </div>
 

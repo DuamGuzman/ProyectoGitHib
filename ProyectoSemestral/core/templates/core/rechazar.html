@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<h1 class="text-center display-6" style="color: black;">Rechazar Orden</h1>
+<p><strong>Número Orden:</strong> {{ orden.numero_orden }}</p>
+<hr />
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datos del Cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form method="POST" action="{% url 'rechazar' orden.id %}">
+                                    {% csrf_token %}
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <textarea name="datos_cliente" id="datos_cliente" cols="30" rows="5">{{ comprobante.datos_cliente }}</textarea>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 20px;">
+                                        <button type="submit" name="action" value="rechazar" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 4px;">Rechazar</button>
+                                        <a href="{% url 'ordenlista' %}" style="background-color: gray; color: white; padding: 10px 20px; border: none; border-radius: 4px; margin-left: 10px;">Cancelar</a>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

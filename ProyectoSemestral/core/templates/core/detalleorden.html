@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block contenido %}
+<h1 class="text-center display-6" style="color: black;">Detalle Comprobante</h1>
+<p><strong>Número Orden:</strong> {{ orden.numero_orden }}</p>
+<hr />
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Datos de la Entrega</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <form method="POST" enctype="multipart/form-data"
+                                    action="{% url 'detalleorden' orden.id %}">
+                                    {% csrf_token %}
+
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <textarea name="datos_cliente" id="datos_cliente" cols="30"
+                                                rows="5">{{ comprobante.datos_cliente }}</textarea>
+
+                                        </div>
+                                    </div>
+                                    <!-- Campo para subir el archivo -->
+                                    <input type="file" name="comprobante_file" accept="image/*,.pdf">
+                                    <button type="submit">Subir</button>
+                                </form>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

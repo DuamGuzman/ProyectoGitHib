@@ -30,6 +30,7 @@ class Orden(models.Model):
     correo = models.EmailField()
     sitio_web = models.URLField(blank=True, null=False)
     tipo_servicio = models.CharField(max_length=100, blank=True, null=True)
+    
 
     def clean(self):
         super().clean()
@@ -53,3 +54,25 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.nombreUsuario
+
+class Comprobante(models.Model):
+    compra = models.ForeignKey(Orden, on_delete=models.CASCADE, related_name='comprobantes')
+    datos_cliente = models.TextField(blank=True, null=True)
+    comprobante = models.FileField(upload_to='comprobantes/', blank=True, null=True)
+
+    def __str__(self):
+        return f'Comprobante de {self.compra.numero_orden}'
+    
+class Estado(models.Model):
+    orden = models.OneToOneField(Orden, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.orden} - {self.nombre}"
+    
+class EstadoPedido(models.Model):
+    orden = models.OneToOneField(Orden, on_delete=models.CASCADE)
+    nombre = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.orden} - {self.nombre}"
