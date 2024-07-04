@@ -3,8 +3,56 @@
 
 {% block contenido %}
 <h1 class="text-center display-6" style="color: black;">Detalle Comprobante</h1>
-<p><strong>Número Orden:</strong> {{ orden.numero_orden }}</p>
-<hr />
+<br>
+<br>
+<br>
+<br>
+<br>
+<center><a href="{% url 'aceptarOrden' %}" class="back-button">⬅️ Volver Atrás</a></center>
+<center><p><strong>Número Orden:</strong> {{ orden.numero_orden }}</p></center>
+<hr/>
+<style>
+    .container {
+        width: 100%;
+        max-width: 800px; 
+    }
+    .table-responsive {
+        text-align: center;
+    }
+    .media {
+        justify-content: center;
+    }
+    .media-body {
+        display: flex;
+        justify-content: center;
+    }
+    form div {
+        display: flex;
+        justify-content: center;
+    }
+    form div textarea {
+        width: 100%;
+        max-width: 600px; 
+    }
+    form input[type="file"] {
+        display: block;
+        margin: 20px auto; 
+    }
+    form button {
+        display: block;
+        margin: 20px auto; 
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+    }
+    form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
 <section class="cart_area">
     <div class="container">
         <div class="cart_inner">
@@ -13,29 +61,22 @@
                     <thead>
                         <tr>
                             <th scope="col">Datos de la Entrega</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
-                                <form method="POST" enctype="multipart/form-data"
-                                    action="{% url 'detalleorden' orden.id %}">
+                                <form id="subirOrdenForm" method="POST" enctype="multipart/form-data" action="{% url 'detalleorden' orden.id %}">
                                     {% csrf_token %}
-
                                     <div class="media">
                                         <div class="media-body">
-                                            <textarea name="datos_cliente" id="datos_cliente" cols="30"
-                                                rows="5">{{ comprobante.datos_cliente }}</textarea>
-
+                                            <textarea name="datos_cliente" id="datos_cliente" cols="30" rows="5">{{ comprobante.datos_cliente }}</textarea>
                                         </div>
                                     </div>
-                                    <!-- Campo para subir el archivo -->
                                     <input type="file" name="comprobante_file" accept="image/*,.pdf">
                                     <button type="submit">Subir</button>
                                 </form>
                             </td>
-                            
                         </tr>
                     </tbody>
                 </table>
@@ -43,4 +84,30 @@
         </div>
     </div>
 </section>
+
+<!-- Script para SweetAlert2 -->
+<script>
+    document.getElementById('subirOrdenForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevenir el envío automático del formulario
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Quieres subir este comprobante?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, subirlo!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, enviar el formulario
+                this.submit();
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% block js %}
+
 {% endblock %}

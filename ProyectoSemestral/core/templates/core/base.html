@@ -2,8 +2,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,9 +31,10 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <!-- owl stylesheets -->
     <link rel="stylesheet" href="{% static 'core/css/owl.carousel.min.css' %}">
-    
+
     <link rel="stylesheet" href="{% static 'core/css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+        media="screen">
 
     {% block css %}
     {% endblock %}
@@ -43,9 +45,12 @@
     <nav class="navbar navbar-expand-lg fixed-top bg-primary navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img id="NovaTech-logo" src="{% static 'core/img/NOVATECH.png' %}" alt="MDB Logo" draggable="false" height="30">
+                <img id="NovaTech-logo" src="{% static 'core/img/NOVATECH.png' %}" alt="MDB Logo" draggable="false"
+                    height="30">
             </a>
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -53,10 +58,10 @@
                     <li class="nav-item ms-3">
                         <a class="nav-link mx-1" href="{% url 'index' %}">Inicio</a>
                     </li>
-                    
+
                     {% if user.is_authenticated %}
                     <li class="nav-item ms-3">
-                        <a class="btn btn-black btn-rounded" href="{% url 'logout' %}">Cerrar Sesión</a>
+                        <button id="logoutBtn" class="btn btn-danger btn-rounded">Cerrar Sesión</button>
                     </li>
                     {% else %}
                     <li class="nav-item ms-3">
@@ -68,22 +73,55 @@
         </div>
     </nav>
     <!-- Navbar -->
-    
+
     {% block contenido %}
     {% endblock %}
 
     <!-- footer section start -->
+    <!-- footer section start -->
     <div class="footer_section layout_padding">
         <div class="container">
             <div class="row">
-                <p class="copyright_text text-white">2024 Todos los derechos reservados a Duoc uc</p>
+                <div class="col-lg-3 col-sm-5">
+                    <h1 class="customer_text">Contáctanos</h1>
+                    <p class="footer_lorem_text">+56 9 3561 3893</p>
+                    <p class="footer_lorem_text">ventas@novatech.cl</p>
+                    <p class="footer_lorem_text">
+                        Lunes a Viernes de 10:00 a 18:30 Hrs.
+                        Sábados de 10:00 a 14:00 Hrs.</p>
+                    <p class="footer_lorem_text">No atendemos Domingos ni Festivos.</p>
+                </div>
+
+                <div class="col-lg-3 col-sm-6">
+                    <h1 class="customer_text">Nuestras marcas</h1>
+                    <p class="footer_lorem_text">Cougar</p>
+                    <p class="footer_lorem_text">Nvidia</p>
+                    <p class="footer_lorem_text">MSI</p>
+                    <p class="footer_lorem_text">AMD</p>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <h1 class="customer_text">Nuestros productos</h1>
+                    <p class="footer_lorem_text1">Memorias RAM<br>
+                    <p class="footer_lorem_text">Disipadores</p><br>
+                    <p class="footer_lorem_text">Refrigeración Líquida</p>
+                    <p class="footer_lorem_text">Tarjetas de video</p>
+                    </p>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <h1 class="customer_text">Medios de Pago</h1>
+                    <img src="{% static 'core/img/mediopago.png' %}" class="img-fluid" alt="" />
+                    <br><br><br>
+                    <img src="{% static 'core/img/NOVATECH.png' %}" class="img-fluid" alt="" />
+                </div>
+
 
             </div>
-                
-            </div>
-            
+
         </div>
+
     </div>
+    <!-- footer section end -->
+
     <!-- footer section end -->
 
     <!-- copyright section end -->
@@ -101,7 +139,36 @@
     <script src="{% static 'core/js/owl.carousel.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
 
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "¿Deseas cerrar sesión?",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, cerrar sesión'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{% url 'logout' %}";
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+
     {% block js %}
     {% endblock %}
 </body>
+
 </html>

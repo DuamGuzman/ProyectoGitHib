@@ -3,8 +3,42 @@
 
 {% block contenido %}
 <h1 class="text-center display-6" style="color: black;">Rechazar Orden</h1>
-<p><strong>Número Orden:</strong> {{ orden.numero_orden }}</p>
+<br>
+<br>
+<center><a href="{% url 'aceptarOrden' %}" class="back-button">⬅️ Volver Atrás</a></center>
+<center><p><strong>Número Orden:</strong> {{ orden.numero_orden }}</p></center>
 <hr />
+<style>
+    .container {
+        width: 100%;
+        max-width: 800px; 
+    }
+    .table-responsive {
+        text-align: center;
+    }
+    .media {
+        justify-content: center;
+    }
+    .media-body {
+        display: flex;
+        justify-content: center;
+    }
+    form div {
+        display: flex;
+        justify-content: center;
+    }
+    form div textarea {
+        width: 100%;
+        max-width: 600px; 
+    }
+    form div button,
+    form div a {
+        display: inline-block;
+        margin: 0 10px; 
+    }
+</style>
+</head>
+<body>
 <section class="cart_area">
     <div class="container">
         <div class="cart_inner">
@@ -28,6 +62,7 @@
                                     <div style="margin-top: 20px;">
                                         <button type="submit" name="action" value="rechazar" style="background-color: red; color: white; padding: 10px 20px; border: none; border-radius: 4px;">Rechazar</button>
                                         <a href="{% url 'ordenlista' %}" style="background-color: gray; color: white; padding: 10px 20px; border: none; border-radius: 4px; margin-left: 10px;">Cancelar</a>
+                                        <a href="{% url 'login' %}" class="text-white"><small class="text-white mx-2">Iniciar sesión</small></a>
                                     </div>
                                 </form>
                             </td>

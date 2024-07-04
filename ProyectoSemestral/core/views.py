@@ -172,10 +172,11 @@ def descargar_pdf(request, orden_id):
     p.setFont("Helvetica-Bold", 10)
     p.drawString(300, cliente_y, "Datos del cliente")
     p.setFont("Helvetica", 10)
-    p.drawString(300, cliente_y - 20, f"Nombre: {orden.nombre_razon_social}")
-    p.drawString(300, cliente_y - 40, f"Dirección: {orden.direccion_cliente}")
-    p.drawString(300, cliente_y - 60, f"Teléfono: {orden.telefono_cliente}")
-    p.drawString(300, cliente_y - 80, f"Correo: {orden.correo_clinte}")
+    p.drawString(300, cliente_y - 20, f"Nombre: {orden.rut_cliente}")
+    p.drawString(300, cliente_y - 40, f"Nombre: {orden.nombre_razon_social}")
+    p.drawString(300, cliente_y - 60, f"Dirección: {orden.direccion_cliente}")
+    p.drawString(300, cliente_y - 80, f"Teléfono: {orden.telefono_cliente}")
+    p.drawString(300, cliente_y - 100, f"Correo: {orden.correo_clinte}")
 
     # Tabla de productos
     table_y = min(vendedor_y, cliente_y) - 190
