@@ -1,5 +1,6 @@
 {% load static %}
 
+
 {% block css %}
 <style>
     .form-container {
@@ -9,9 +10,11 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
+
     .form-title {
         color: #343a40;
     }
+
 
     .form-section-title {
         color: #495057;
@@ -19,29 +22,35 @@
         margin-bottom: 10px;
     }
 
+
     .main-container {
         margin-top: 80px;
         /* Ajuste el valor según el espacio deseado */
     }
 
+
     .table-container {
         margin-top: 40px;
     }
+
 
     .table thead th {
         background-color: #343a40;
         color: #fff;
     }
 
+
     .table tfoot td {
         font-weight: bold;
     }
+
 
     .navbar-light .navbar-nav .nav-link {
         color: #ffffff;
     }
 </style>
 {% endblock %}
+
 
 {% block contenido %}
 <!DOCTYPE html>
@@ -77,6 +86,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 </head>
 
+
 <body>
     <!-- header section start -->
     <nav class="navbar navbar-expand-lg fixed-top bg-primary navbar-light">
@@ -100,23 +110,37 @@
         </div>
     </nav>
     <!-- header section end -->
-    
+   
     <div class="container main-container">
         <div class="form-container">
             <h1 class="form-title mb-4">Orden de Compra</h1>
-
+   
             <form method="post" id="crear-orden-form">
                 {% csrf_token %}
                 <table>
-                    {{ form }}
-                    
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                        <tr>
+                            <td>
+                                <label for="{{ field.id_for_label }}" style="font-weight: bold;">
+                                    {{ field.label }}{% if field.name != 'telefono_cliente' and field.name != 'telefono' and field.name != 'sitio_web' and field.name != 'tipo_servicio' %}<span style="color: red; margin-left: 5px;">*</span>{% endif %}
+                                </label>
+                            </td>
+                            <td>
+                                {{ field }}
+                                {{ field.errors }}
+                            </td>
+                        </tr>
+                    {% endfor %}
                 </table>
                 <button type="button" class="btn btn-primary mt-3" onclick="confirmCreateOrder()">Crear Orden</button>
             </form>
             <a href="{% url 'producto' %}" class="btn btn-secondary mt-3">Ir a la página de productos</a>
         </div>
     </div>
-
+   
+   
+   
     <!-- JavaScript para SweetAlert -->
     <script>
         function confirmCreateOrder() {
@@ -126,7 +150,6 @@
                 icon: "question",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
                 confirmButtonText: "Sí, crear orden!"
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -136,6 +159,7 @@
             });
         }
     </script>
+
 
 </body>
 </html>

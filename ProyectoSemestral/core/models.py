@@ -21,12 +21,12 @@ class Orden(models.Model):
     rut_cliente = models.CharField(max_length=12)
     nombre_razon_social = models.CharField(max_length=100)
     direccion_cliente = models.CharField(max_length=200)
-    telefono_cliente = models.CharField(max_length=15)
+    telefono_cliente = models.CharField(max_length=15,blank=True, null=False)
     correo_clinte = models.EmailField()
-    rut = models.CharField(max_length=12, blank=True, null=True)
+    rut = models.CharField(max_length=12)
     razon_social = models.CharField(max_length=100)
     direccion = models.CharField(max_length=200)
-    telefono = models.CharField(max_length=15)
+    telefono = models.CharField(max_length=15,blank=True, null=False)
     correo = models.EmailField()
     sitio_web = models.URLField(blank=True, null=False)
     tipo_servicio = models.CharField(max_length=100, blank=True, null=True)
@@ -59,6 +59,7 @@ class Comprobante(models.Model):
     compra = models.ForeignKey(Orden, on_delete=models.CASCADE, related_name='comprobantes')
     datos_cliente = models.TextField(blank=True, null=True)
     comprobante = models.FileField(upload_to='comprobantes/', blank=True, null=True)
+    
 
     def __str__(self):
         return f'Comprobante de {self.compra.numero_orden}'

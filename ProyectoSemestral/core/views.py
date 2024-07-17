@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
-from .forms import OrdenForm, ProductoForm
+from .forms import *
 from .models import Orden, Producto
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
@@ -16,6 +16,10 @@ from django.contrib.staticfiles import finders
 from reportlab.lib.units import inch
 from django.core.files.storage import FileSystemStorage
 from .models import * 
+from reportlab.lib.colors import Color, lightgrey, red, darkred
+
+
+
 
 # Create your views here.
 @login_required
@@ -148,6 +152,18 @@ def descargar_pdf(request, orden_id):
     p.setFont("Helvetica-Bold", 18)
     p.drawString(200, height - 40, "ORDEN DE COMPRA")
 
+    # Si la orden está anulada, agrega la marca de agua en rojo translúcido
+    if orden.estado.nombre == 'Anulada':
+        p.saveState()
+        p.setFont("Helvetica-Bold", 90)  # Aumenta el tamaño de la fuente un 50%
+        # Define un color rojo translúcido (RGBA)
+        red_translucent = Color(1, 0, 0, alpha=0.5)  # Rojo, sin verde, sin azul, 50% de transparencia
+        p.setFillColor(red_translucent)
+        p.translate(width/2, height/2)
+        p.rotate(45)
+        p.drawCentredString(0, 0, "ANULADO")
+        p.restoreState()
+
     # Detalles de la orden
     p.setFont("Helvetica-Bold", 12)
     p.drawString(30, height - 60, "Detalles de la orden")
@@ -172,7 +188,7 @@ def descargar_pdf(request, orden_id):
     p.setFont("Helvetica-Bold", 10)
     p.drawString(300, cliente_y, "Datos del cliente")
     p.setFont("Helvetica", 10)
-    p.drawString(300, cliente_y - 20, f"Nombre: {orden.rut_cliente}")
+    p.drawString(300, cliente_y - 20, f"RUT: {orden.rut_cliente}")
     p.drawString(300, cliente_y - 40, f"Nombre: {orden.nombre_razon_social}")
     p.drawString(300, cliente_y - 60, f"Dirección: {orden.direccion_cliente}")
     p.drawString(300, cliente_y - 80, f"Teléfono: {orden.telefono_cliente}")
@@ -209,12 +225,13 @@ def descargar_pdf(request, orden_id):
     
     return response
 
+
 @login_required
 def actualizar_orden(request, orden_id):
     orden = get_object_or_404(Orden, id=orden_id)
 
     if request.method == 'POST':
-        form = OrdenForm(request.POST, instance=orden)
+        form = OrdenFormActualizar(request.POST, instance=orden)
         if form.is_valid():
             form.save()
             # Cambiar el estado a 'Rectificada'
@@ -223,7 +240,7 @@ def actualizar_orden(request, orden_id):
             estado.save()
             return redirect('ordenlista')  # Redirigir a la lista de órdenes después de actualizar
     else:
-        form = OrdenForm(instance=orden)
+        form = OrdenFormActualizar(instance=orden)
 
     return render(request, 'core/actualizar_orden.html', {'form': form})
 
@@ -313,3 +330,19 @@ def mi_vista(request, orden_id):
         'total_con_iva': total_con_iva,
     }
     return render(request, 'ordenlista.html', context)
+
+
+def anular(request, orden_id):
+    orden = get_object_or_404(Orden, id=orden_id)
+    
+    if request.method == 'POST':
+        # Obtener o crear la instancia de Estado correspondiente a la orden
+        estado, created = Estado.objects.get_or_create(orden=orden)
+        estado.nombre = 'Anulada'
+        estado.save()
+        
+        # Redirigir a la lista de órdenes después de actualizar
+        return redirect('ordenlista')
+
+    # Renderizar la plantilla anular.html pasando la orden
+    return render(request, 'core/anular.html', {'orden': orden})

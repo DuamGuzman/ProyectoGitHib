@@ -6,26 +6,26 @@
 {% block contenido %}
 <h1>Lista de Órdenes</h1>
 {% if show_alert %}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer);
-                    toast.addEventListener('mouseleave', Swal.resumeTimer);
-                }
-            });
-            Toast.fire({
-                icon: "success",
-                title: "¡Orden actualizada con éxito!"
-            });
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
+            }
         });
-    </script>
+        Toast.fire({
+            icon: "success",
+            title: "¡Orden actualizada con éxito!"
+        });
+    });
+</script>
 {% endif %}
 <br><br><br>
 <center><a href="{% url 'index' %}" class="back-button">⬅️ Volver Atrás</a></center>
@@ -41,10 +41,12 @@
         <h2>Orden de Compra: {{ orden.numero_orden }}</h2>
 
         <div class="buttons">
+            {% if orden.estado.nombre != 'Anulada' %}
             <a href="{% url 'actualizar_orden' orden.id %}" class="btn btn-primary">
                 <img src="{% static 'core/img/lapiz.png' %}" alt="Rectificar" class="button-icon">
                 Rectificar
             </a>
+            {% endif %}
             <a href="{% url 'descargar_pdf' orden.id %}" class="btn btn-success">
                 <img src="{% static 'core/img/descarga.png' %}" alt="Descargar" class="button-icon">
                 Descargar
@@ -121,34 +123,40 @@
         {% if orden.productos.all %}
         {% for producto in orden.productos.all %}
         <!-- Muestra el precio unitario de cada producto sin aplicar IVA -->
-        <p><strong style="font-weight: bold;">Precio de {{ producto.nombre_producto }} con IVA:</strong> {{ producto.precio_unitario|incremento_iva }} </p>
+        <p><strong style="font-weight: bold;">Precio de {{ producto.nombre_producto }} con IVA:</strong> 
+            {{producto.precio_unitario|incremento_iva }} </p>
         {% endfor %}
-        
+
         {% endif %}
     </div>
 
     <div class="order-summary">
         <h3>Estado de la Orden</h3>
         {% if orden.estado.nombre == 'Rectificada' %}
-        <p><strong style="font-weight: bold;">Estado de la Factura:</strong> Rectificada</p>
+        <p style="color: orange;"><strong style="font-weight: bold;">Estado de la Factura:</strong> Rectificada</p>
+        {% elif orden.estado.nombre == 'Anulada' %}
+        <p style="color: gray;"><strong style="font-weight: bold;">Estado de la Factura:</strong> Anulada</p>
         {% else %}
-        <p><strong style="font-weight: bold;">Estado de la Factura:</strong> Creada</p>
+        <p style="color: rgb(180, 180, 10);"><strong style="font-weight: bold;">Estado de la Factura:</strong> Creada</p>
         {% endif %}
+    
         {% if orden.estadopedido.nombre == 'Entregada' %}
-        <p><strong style="font-weight: bold;">Estado del Pedido:</strong> Entregada</p>
+        <p style="color: green;"><strong style="font-weight: bold;">Estado del Pedido:</strong> Entregada</p>
         {% elif orden.estadopedido.nombre == 'Rechazada' %}
-        <p><strong style="font-weight: bold;">Estado del Pedido:</strong> Rechazada</p>
+        <p style="color: red;"><strong style="font-weight: bold;">Estado del Pedido:</strong> Rechazada</p>
         {% else %}
-        <p><strong style="font-weight: bold;">Estado del Pedido:</strong> Por Entregar</p>
+        <p style="color: #089bdf;"><strong style="font-weight: bold;">Estado del Pedido:</strong> Por Entregar</p>
         {% endif %}
-
-
-        <!-- Agregar el botón para ver detalle -->
+    
+        {% if orden.estado.nombre != 'Anulada' %}
+        <!-- Mostrar botones solo si la orden no está anulada -->
         <a href="{% url 'verdetalle' orden.id %}" class="btn btn-info">
-            
             Ver Detalle
         </a>
-
+        <a href="{% url 'anular' orden.id %}" class="btn btn-info">
+            Anular
+        </a>
+        {% endif %}
     </div>
 </div>
 <br>
